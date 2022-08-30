@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Channel</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&family=Oswald:wght@300&family=Rubik+Marker+Hatch&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link href="31_style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4 left-side">
+            <form class="CurrentSearch">
+              <div class="row mt-5">
+                <div class="col-9">
+                  <div class="row">
+                    <div class="input-group">
+                      <input
+                        type="search"
+                        class="form-control"
+                        placeholder="Type a city..."
+                        aria-label="Search"
+                        aria-describedby="search-addon"
+                        id="input-search"
+                      />
+                      <button type="submit" class="btn btn-primary">
+                        Search
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    id="current-button"
+                  >
+                    Current
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="today-weather mt-4">
+              <h1 id="currentCity">Paris</h1>
+              <p class="today-day">Mon, 1 Aug</p>
+              <img
+                src="12_img/sun.svg"
+                alt="sun"
+                class="sun_today"
+                width="150"
+              />
+              <p class="today-temperature mt-2">26°C</p>
+            </div>
+            <div id="units">
+              <button type="button" class="btn btn-primary" id="celsius">
+                °C
+              </button>
+              <button type="button" class="btn btn-primary" id="fahrenheit">
+                °F
+              </button>
+            </div>
+          </div>
+          <div class="col-md-8 right-side">
+            <div class="col right-side-cont">
+              <div class="row row-cols-1 row-cols-md-5 g-2 right-left">
+                <div class="col">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weeks-day">Tue, 2 Aug</p>
+                      <img
+                        src="12_img/sun.svg"
+                        alt="sun"
+                        class="sun"
+                        width="70%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">21°C | 32°C</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weeks-day">Wed, 3 Aug</p>
+                      <img
+                        src="12_img/clouds.svg"
+                        alt="clouds"
+                        class="clouds"
+                        width="70%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">23°C | 34°C</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weeks-day">Thu, 4 Aug</p>
+                      <img
+                        src="12_img/thunderstorm.svg"
+                        alt="thunderstorm"
+                        class="thunderstorm"
+                        width="70%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">24°C | 30°C</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weeks-day">Fri, 5 Aug</p>
+                      <img
+                        src="12_img/rainy.svg"
+                        alt="rainy"
+                        class="rainy"
+                        width="70%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">27°C | 33°C</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weeks-day">Sat, 6 Aug</p>
+                      <img
+                        src="12_img/sunny.svg"
+                        alt="sunny"
+                        class="sunny"
+                        width="70%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">25°C | 36°C</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-0">
+                <h5 class="weeks-title text-center">
+                  <br />
+                  Highlights
+                </h5>
+              </div>
+              <div class="row g-0">
+                <div class="row row-cols-1 row-cols-md-5 g-2">
+                  <div class="col"></div>
+                  <div class="col">
+                    <div class="card text-center">
+                      <div class="card-body">
+                        <p class="card-text weeks-day">Humidity</p>
+                        <img
+                          src="12_img/humidity.svg"
+                          alt="Humidity"
+                          class="humidity"
+                          width="70%"
+                        />
+                        <hr />
+                        <p class="card-text weather-temp">55%</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card text-center">
+                      <div class="card-body">
+                        <p class="card-text weeks-day">Wind</p>
+                        <img
+                          src="12_img/wind.svg"
+                          alt="Wind"
+                          class="wind"
+                          width="70%"
+                        />
+                        <hr />
+                        <p class="card-text weather-temp">4 km/h</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card text-center">
+                      <div class="card-body">
+                        <p class="card-text weeks-day">UV Index</p>
+                        <img
+                          src="12_img/sunblock.svg"
+                          alt="sunblock"
+                          class="sunblock"
+                          width="70%"
+                        />
+                        <hr />
+                        <p class="card-text weather-temp">2</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="31_script.js"></script>
+  </body>
+</html>

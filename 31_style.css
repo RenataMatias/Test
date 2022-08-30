@@ -1,0 +1,51 @@
+p {
+  text-align: center;
+}
+h1 {
+  text-align: center;
+}
+h5 {
+  text-align: left;
+}
+.container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.CurrentSearch {
+  margin: 50px 50px 40px;
+}
+.today-day {
+  text-align: center;
+  font-size: 30px;
+}
+.today-temperature {
+  text-align: center;
+  font-size: 65px;
+  font-weight: bold;
+  font-family: "Barlow", sans-serif;
+}
+.sun_today {
+  display: block;
+  margin: 0 auto;
+}
+.card {
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgb(205, 204, 204);
+}
+/* .row {
+  display: block;
+  margin-top: 10px;
+} */
+.right-side-cont {
+  margin: 15px;
+}
+.right-side {
+  background: rgba(227, 227, 227, 0.252);
+}
+.right-left {
+  margin-top: 25px;
+}
+#units {
+  text-align: center;
+  margin-bottom: 20px;
+}
