@@ -1,3 +1,6 @@
+/* body {
+  font-family: arial, sans-serif;
+} */
 p {
   text-align: center;
 }
@@ -8,15 +11,23 @@ h5 {
   text-align: left;
 }
 .container {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 30px auto;
+  max-width: 1300px;
 }
 .CurrentSearch {
-  margin: 50px 50px 40px;
+  margin: 15px 50px 40px;
+}
+#search-time {
+  font-size: 15px;
 }
 .today-day {
   text-align: center;
   font-size: 30px;
+  line-height: 0.8;
+}
+#weather-status {
+  font-size: 25px;
+  text-transform: capitalize;
 }
 .today-temperature {
   text-align: center;
@@ -24,7 +35,7 @@ h5 {
   font-weight: bold;
   font-family: "Barlow", sans-serif;
 }
-.sun_today {
+.icon_today {
   display: block;
   margin: 0 auto;
 }
@@ -43,11 +54,11 @@ h5 {
   background: rgba(227, 227, 227, 0.252);
 }
 .right-left {
-  margin-top: 25px;
+  margin-top: 58px;
 }
 #units {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .github-link {
   text-align: center;
