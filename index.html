@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Page</title>
+    <title>Weather Channel</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&family=Oswald:wght@300&family=Rubik+Marker+Hatch&display=swap"
       rel="stylesheet"
@@ -35,6 +35,7 @@
                         aria-label="Search"
                         aria-describedby="search-addon"
                         id="input-search"
+                        autocomplete="off"
                       />
                       <button type="submit" class="btn btn-primary">
                         Search
@@ -55,11 +56,13 @@
             </form>
             <div class="today-weather mt-4">
               <h1 id="currentCity">Paris</h1>
+              <p id="search-time">Last Updated:</p>
               <p class="today-day">Mon, 1 Aug</p>
+              <p id="weather-status">Clear Sky</p>
               <img
-                src="12_img/sun.svg"
-                alt="sun"
-                class="sun_today"
+                src="12_img/clear1.svg"
+                alt="clear"
+                class="icon_today"
                 width="150"
               />
               <p class="today-temperature mt-2">26°C</p>
@@ -79,11 +82,11 @@
                 <div class="col">
                   <div class="card text-center">
                     <div class="card-body">
-                      <p class="card-text weeks-day">Tue, 2 Aug</p>
+                      <p class="card-text">Tue, 2 Aug</p>
                       <img
-                        src="12_img/sun.svg"
-                        alt="sun"
-                        class="sun"
+                        src="12_img/clear1.svg"
+                        alt="clear"
+                        class="clear"
                         width="70%"
                       />
                       <hr />
@@ -96,7 +99,7 @@
                     <div class="card-body">
                       <p class="card-text weeks-day">Wed, 3 Aug</p>
                       <img
-                        src="12_img/clouds.svg"
+                        src="12_img/clouds2.svg"
                         alt="clouds"
                         class="clouds"
                         width="70%"
@@ -126,7 +129,7 @@
                     <div class="card-body">
                       <p class="card-text weeks-day">Fri, 5 Aug</p>
                       <img
-                        src="12_img/rainy.svg"
+                        src="12_img/Drizzle-rain.svg"
                         alt="rainy"
                         class="rainy"
                         width="70%"
@@ -141,7 +144,7 @@
                     <div class="card-body">
                       <p class="card-text weeks-day">Sat, 6 Aug</p>
                       <img
-                        src="12_img/sunny.svg"
+                        src="12_img/clouds1.svg"
                         alt="sunny"
                         class="sunny"
                         width="70%"
@@ -165,6 +168,40 @@
                   <div class="col">
                     <div class="card text-center">
                       <div class="card-body">
+                        <p class="card-text weeks-day">Wind</p>
+                        <img
+                          src="12_img/wind1.svg"
+                          alt="Wind"
+                          class="wind"
+                          width="70%"
+                        />
+                        <hr />
+                        <p class="card-text weather-temp">
+                          <span id="wind-speed">4</span> km/h
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card text-center">
+                      <div class="card-body">
+                        <p class="card-text weeks-day">Feels Like</p>
+                        <img
+                          src="12_img/temperature.svg"
+                          alt="MaxMinTemp"
+                          class="MaxMinTemp"
+                          width="85%"
+                        />
+                        <hr />
+                        <p class="card-text weather-temp">
+                          <span id="feels-like">12</span> °C
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card text-center">
+                      <div class="card-body">
                         <p class="card-text weeks-day">Humidity</p>
                         <img
                           src="12_img/humidity.svg"
@@ -173,37 +210,9 @@
                           width="70%"
                         />
                         <hr />
-                        <p class="card-text weather-temp">55%</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <p class="card-text weeks-day">Wind</p>
-                        <img
-                          src="12_img/wind.svg"
-                          alt="Wind"
-                          class="wind"
-                          width="70%"
-                        />
-                        <hr />
-                        <p class="card-text weather-temp">4 km/h</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <p class="card-text weeks-day">UV Index</p>
-                        <img
-                          src="12_img/sunblock.svg"
-                          alt="sunblock"
-                          class="sunblock"
-                          width="70%"
-                        />
-                        <hr />
-                        <p class="card-text weather-temp">2</p>
+                        <p class="card-text weather-temp">
+                          <span id="humidity">55</span>%
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -213,13 +222,16 @@
           </div>
         </div>
       </div>
+      <div class="github-link">
+        <span
+          ><a href="https://github.com/RenataMatias/Test" target="_blank"
+            >Open-source code</a
+          >
+          by Renata Matias</span
+        >
+      </div>
     </div>
-    <div class="github-link">
-      <span
-        ><a href="https://github.com/RenataMatias/Test">Open-source code</a> by
-        Renata Matias</span
-      >
-    </div>
-    <script src="31_script.js"></script>
+
+    <script src="31_script_test.js"></script>
   </body>
 </html>
