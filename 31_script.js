@@ -1,45 +1,3 @@
-function displayForescast(response) {
-  console.log(response.data.daily);
-  let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-2">`;
-  let forecastDays = ["Tue", "Wed", "Thu", "Fri", "Sat"];
-  forecastDays.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      ` <div class="col">
-          <div class="card text-center">
-            <div class="card-body">
-                <p class="card-text">Tue, 2 Aug</p>
-                <img
-                src="12_img/clear1.svg"
-                alt="clear"
-                class="clear"
-                width="70%"
-                />
-                <hr />
-                <div class="card-text weather-forecast-temp">
-                  <span class="weather-forecast-temp-max">32°C</span>
-                  <span class="weather-forecast-temp-min"> | 21°C</span>
-                </div>
-            </div>
-          </div>
-        </div>
-    `;
-  });
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
-}
-
-function getForescast(coordinates) {
-  console.log(coordinates);
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let unit = "metric";
-  let APIurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
-  console.log(APIurl);
-  axios.get(APIurl).then(displayForescast);
-}
-
 function updateImage(weatherMain) {
   if (weatherMain === "Thunderstorm") {
     return "12_img/thunderstorm.svg";
@@ -58,6 +16,94 @@ function updateImage(weatherMain) {
     // atualizar
     return "12_img/clouds2.svg";
   }
+}
+
+function forecastImage(forecastDay) {
+  let weatherMain = forecastDay.weather[0].main;
+  let weatherId = forecastDay.weather[0].id;
+  if (
+    weatherId === 500 ||
+    weatherId === 501 ||
+    weatherId === 502 ||
+    weatherId === 503 ||
+    weatherId === 504
+  ) {
+    return "12_img/rain1.svg";
+  } else if (weatherId === 511) {
+    return "12_img/snow1.svg";
+  } else if (weatherId === 801) {
+    return "12_img/clouds1.svg";
+  } else if (
+    weatherId === 701 ||
+    weatherId === 711 ||
+    weatherId === 721 ||
+    weatherId === 731 ||
+    weatherId === 741 ||
+    weatherId === 751 ||
+    weatherId === 761 ||
+    weatherId === 762 ||
+    weatherId === 771 ||
+    weatherId === 781
+  ) {
+    return "12_img/fog1.svg";
+  } else {
+    return updateImage(weatherMain);
+  }
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
+function displayForescast(response) {
+  let forecast = response.data.daily;
+  console.log(forecast);
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-2">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        ` <div class="col">
+            <div class="card text-center">
+              <div class="card-body">
+                  <p class="card-text">${formatDay(forecastDay.dt)}</p>
+                  <img
+                  src="${forecastImage(forecastDay)}"
+                  alt="${forecastDay.weather[0].description}"
+                  class="forecastWeather"
+                  width="70%"
+                  />
+                  <hr />
+                  <div class="card-text weather-forecast-temp">
+                    <span class="weather-forecast-temp-max">${Math.round(
+                      forecastDay.temp.max
+                    )}°C</span>
+                    <span class="weather-forecast-temp-min"> | ${Math.round(
+                      forecastDay.temp.min
+                    )}°C</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+      `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  console.log(forecastHTML);
+}
+
+function getForescast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let unit = "metric";
+  let APIurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+  console.log(APIurl);
+  axios.get(APIurl).then(displayForescast);
 }
 
 function showTemperature(response) {

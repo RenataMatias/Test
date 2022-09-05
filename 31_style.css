@@ -63,3 +63,6 @@ h5 {
 .github-link {
   text-align: center;
 }
+.weather-forecast-temp-max {
+  font-weight: bold;
+}
