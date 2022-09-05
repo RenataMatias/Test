@@ -68,6 +68,7 @@ function showTemperature(response) {
   } else {
     iconElement.setAttribute("src", updateImage(weatherMain));
   }
+  iconElement.setAttribute("alt", weatherStatus);
 }
 
 function search(city) {
