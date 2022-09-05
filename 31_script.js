@@ -1,3 +1,45 @@
+function displayForescast(response) {
+  console.log(response.data.daily);
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-2">`;
+  let forecastDays = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  forecastDays.forEach(function (forecastDay) {
+    forecastHTML =
+      forecastHTML +
+      ` <div class="col">
+          <div class="card text-center">
+            <div class="card-body">
+                <p class="card-text">Tue, 2 Aug</p>
+                <img
+                src="12_img/clear1.svg"
+                alt="clear"
+                class="clear"
+                width="70%"
+                />
+                <hr />
+                <div class="card-text weather-forecast-temp">
+                  <span class="weather-forecast-temp-max">32°C</span>
+                  <span class="weather-forecast-temp-min"> | 21°C</span>
+                </div>
+            </div>
+          </div>
+        </div>
+    `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  console.log(forecastHTML);
+}
+
+function getForescast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let unit = "metric";
+  let APIurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+  console.log(APIurl);
+  axios.get(APIurl).then(displayForescast);
+}
+
 function updateImage(weatherMain) {
   if (weatherMain === "Thunderstorm") {
     return "12_img/thunderstorm.svg";
@@ -22,13 +64,13 @@ function showTemperature(response) {
   console.log(response);
   temperapureC = `${Math.round(response.data.main.temp)}`;
   CurrentTemperature.innerHTML = `${temperapureC}°C`;
-  feelsLikeC = Math.round(response.data.main.feels_like);
-  feelsLike.innerHTML = `${feelsLikeC}°C`;
   let location = response.data.name;
   console.log(location);
   document.querySelector("#currentCity").innerHTML = `${location}`;
   let wind = document.querySelector("#wind-speed");
   wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
+  feelsLike.innerHTML = `${Math.round(response.data.main.feels_like)}°C`;
+  feelsLikeC = Math.round(response.data.main.feels_like);
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = `${Math.round(response.data.main.humidity)}`;
   let weatherStatus = document.querySelector("#weather-status");
@@ -69,6 +111,8 @@ function showTemperature(response) {
     iconElement.setAttribute("src", updateImage(weatherMain));
   }
   iconElement.setAttribute("alt", weatherStatus);
+
+  getForescast(response.data.coord);
 }
 
 function search(city) {
