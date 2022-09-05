@@ -22,13 +22,13 @@ function showTemperature(response) {
   console.log(response);
   temperapureC = `${Math.round(response.data.main.temp)}`;
   CurrentTemperature.innerHTML = `${temperapureC}°C`;
+  feelsLikeC = Math.round(response.data.main.feels_like);
+  feelsLike.innerHTML = `${feelsLikeC}°C`;
   let location = response.data.name;
   console.log(location);
   document.querySelector("#currentCity").innerHTML = `${location}`;
   let wind = document.querySelector("#wind-speed");
   wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
-  let feelsLike = document.querySelector("#feels-like");
-  feelsLike.innerHTML = `${Math.round(response.data.main.feels_like)}`;
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = `${Math.round(response.data.main.humidity)}`;
   let weatherStatus = document.querySelector("#weather-status");
@@ -134,16 +134,21 @@ function formatDate() {
 function UpdateTemperapureC(event) {
   event.preventDefault();
   CurrentTemperature.innerHTML = `${temperapureC}°C`;
+  feelsLike.innerHTML = `${feelsLikeC}°C`;
 }
 function UpdateTemperapureF(event) {
   event.preventDefault();
   let temperatureF = Math.round(temperapureC * 1.8 + 32);
+  let feelsLikeF = Math.round(feelsLikeC * 1.8 + 32);
   CurrentTemperature.innerHTML = `${temperatureF}°F`;
+  feelsLike.innerHTML = `${feelsLikeF}°F`;
 }
 
 let temperapureC = null;
+let feelsLikeC = null;
 let CurrentTemperature = document.querySelector(".today-temperature");
 let city = document.querySelector("#currentCity");
+let feelsLike = document.querySelector("#feels-like");
 
 search("New York");
 
