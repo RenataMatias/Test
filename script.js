@@ -1,18 +1,18 @@
 function updateImage(weatherMain) {
   if (weatherMain === "Thunderstorm") {
-    return "12_img/thunderstorm.svg";
+    return "img/thunderstorm.svg";
   } else if (weatherMain === "Drizzle") {
-    return "12_img/Drizzle-rain.svg";
+    return "img/Drizzle-rain.svg";
   } else if (weatherMain === "Rain") {
-    return "12_img/Drizzle-rain.svg";
+    return "img/Drizzle-rain.svg";
   } else if (weatherMain === "Snow") {
-    return "12_img/snow1.svg";
+    return "img/snow1.svg";
   } else if (weatherMain === "Atmosphere") {
-    return "12_img/fog1.svg";
+    return "img/fog1.svg";
   } else if (weatherMain === "Clear") {
-    return "12_img/clear1.svg";
+    return "img/clear1.svg";
   } else if (weatherMain === "Clouds") {
-    return "12_img/clouds2.svg";
+    return "img/clouds2.svg";
   }
 }
 
@@ -28,9 +28,9 @@ function forecastImage(forecastDay) {
     weatherId === 503 ||
     weatherId === 504
   ) {
-    return "12_img/rain1.svg";
+    return "img/rain1.svg";
   } else if (weatherId === 511) {
-    return "12_img/snow1.svg";
+    return "img/snow1.svg";
   } else if (
     weatherId === 701 ||
     weatherId === 711 ||
@@ -43,9 +43,9 @@ function forecastImage(forecastDay) {
     weatherId === 771 ||
     weatherId === 781
   ) {
-    return "12_img/fog1.svg";
+    return "img/fog1.svg";
   } else if (weatherId === 801) {
-    return "12_img/clouds1.svg";
+    return "img/clouds1.svg";
   } else {
     return updateImage(weatherMain);
   }
