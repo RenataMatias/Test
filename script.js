@@ -4,7 +4,6 @@ function updateImage(weatherMain) {
   } else if (weatherMain === "Drizzle") {
     return "12_img/Drizzle-rain.svg";
   } else if (weatherMain === "Rain") {
-    // atualizar depois
     return "12_img/Drizzle-rain.svg";
   } else if (weatherMain === "Snow") {
     return "12_img/snow1.svg";
@@ -13,14 +12,15 @@ function updateImage(weatherMain) {
   } else if (weatherMain === "Clear") {
     return "12_img/clear1.svg";
   } else if (weatherMain === "Clouds") {
-    // atualizar
     return "12_img/clouds2.svg";
   }
 }
 
 function forecastImage(forecastDay) {
   let weatherMain = forecastDay.weather[0].main;
+  // console.log(forecastDay);
   let weatherId = forecastDay.weather[0].id;
+  // console.log(weatherId);
   if (
     weatherId === 500 ||
     weatherId === 501 ||
@@ -31,8 +31,6 @@ function forecastImage(forecastDay) {
     return "12_img/rain1.svg";
   } else if (weatherId === 511) {
     return "12_img/snow1.svg";
-  } else if (weatherId === 801) {
-    return "12_img/clouds1.svg";
   } else if (
     weatherId === 701 ||
     weatherId === 711 ||
@@ -46,6 +44,8 @@ function forecastImage(forecastDay) {
     weatherId === 781
   ) {
     return "12_img/fog1.svg";
+  } else if (weatherId === 801) {
+    return "12_img/clouds1.svg";
   } else {
     return updateImage(weatherMain);
   }
@@ -60,7 +60,7 @@ function formatDay(timestamp) {
 
 function displayForescast(response) {
   let forecast = response.data.daily;
-  console.log(forecast);
+  // console.log(forecast);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-2">`;
   forecast.forEach(function (forecastDay, index) {
@@ -79,12 +79,12 @@ function displayForescast(response) {
                   />
                   <hr />
                   <div class="card-text weather-forecast-temp">
-                    <span class="weather-forecast-temp-max">${Math.round(
+                    <span class="weather-forecast-tempC-max">${Math.round(
                       forecastDay.temp.max
-                    )}°C</span>
-                    <span class="weather-forecast-temp-min"> | ${Math.round(
+                    )}</span></span class="forecast-unit">${unitTemp}</span>
+                    <span class="weather-forecast-tempC-min"> | ${Math.round(
                       forecastDay.temp.min
-                    )}°C</span>
+                    )}</span></span class="forecast-unit">${unitTemp}</span>
                   </div>
               </div>
             </div>
@@ -94,24 +94,22 @@ function displayForescast(response) {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
 }
 
-function getForescast(coordinates) {
-  console.log(coordinates);
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let unit = "metric";
-  let APIurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
-  console.log(APIurl);
+function getForescast() {
+  //   console.log(coordinates);
+  let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
+  let APIurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
+  // console.log(APIurl);
   axios.get(APIurl).then(displayForescast);
 }
 
 function showTemperature(response) {
-  console.log(response);
+  // console.log(response);
   temperapureC = `${Math.round(response.data.main.temp)}`;
   CurrentTemperature.innerHTML = `${temperapureC}°C`;
   let location = response.data.name;
-  console.log(location);
+  // console.log(location);
   document.querySelector("#currentCity").innerHTML = `${location}`;
   let wind = document.querySelector("#wind-speed");
   wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
@@ -122,48 +120,24 @@ function showTemperature(response) {
   let weatherStatus = document.querySelector("#weather-status");
   weatherStatus.innerHTML = `${response.data.weather[0].description}`;
   weatherStatus = response.data.weather[0].description;
-  console.log(weatherStatus);
+  // console.log(weatherStatus);
   let iconElement = document.querySelector(".icon_today");
-  console.log(iconElement);
-  let weatherMain = response.data.weather[0].main;
-  let weatherId = response.data.weather[0].id;
-  console.log(weatherId);
-  if (
-    weatherId === 500 ||
-    weatherId === 501 ||
-    weatherId === 502 ||
-    weatherId === 503 ||
-    weatherId === 504
-  ) {
-    iconElement.setAttribute("src", "12_img/rain1.svg");
-  } else if (weatherId === 511) {
-    iconElement.setAttribute("src", "12_img/snow1.svg");
-  } else if (weatherId === 801) {
-    iconElement.setAttribute("src", "12_img/clouds1.svg");
-  } else if (
-    weatherId === 701 ||
-    weatherId === 711 ||
-    weatherId === 721 ||
-    weatherId === 731 ||
-    weatherId === 741 ||
-    weatherId === 751 ||
-    weatherId === 761 ||
-    weatherId === 762 ||
-    weatherId === 771 ||
-    weatherId === 781
-  ) {
-    iconElement.setAttribute("src", "12_img/fog1.svg");
-  } else {
-    iconElement.setAttribute("src", updateImage(weatherMain));
-  }
+  // console.log(iconElement);
+  let weatherData = response.data;
+  // console.log(weatherData);
+  iconElement.setAttribute("src", forecastImage(weatherData));
   iconElement.setAttribute("alt", weatherStatus);
 
-  getForescast(response.data.coord);
+  lat = response.data.coord.lat;
+  lon = response.data.coord.lon;
+
+  getForescast();
 }
 
 function search(city) {
+  unit = "metric";
+  unitTemp = "°C";
   let apiKey = "697a37f1b088537cbe4399bcf02a85a4";
-  let unit = "metric";
   let APIurl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
   axios.get(APIurl).then(showTemperature);
 }
@@ -179,7 +153,6 @@ function UpdateLocationDisplay(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiKey = "697a37f1b088537cbe4399bcf02a85a4";
-  let unit = "metric";
   let APIurl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
   axios.get(APIurl).then(showTemperature);
 }
@@ -225,6 +198,9 @@ function UpdateTemperapureC(event) {
   event.preventDefault();
   CurrentTemperature.innerHTML = `${temperapureC}°C`;
   feelsLike.innerHTML = `${feelsLikeC}°C`;
+  unit = "metric";
+  unitTemp = "°C";
+  getForescast();
 }
 function UpdateTemperapureF(event) {
   event.preventDefault();
@@ -232,10 +208,17 @@ function UpdateTemperapureF(event) {
   let feelsLikeF = Math.round(feelsLikeC * 1.8 + 32);
   CurrentTemperature.innerHTML = `${temperatureF}°F`;
   feelsLike.innerHTML = `${feelsLikeF}°F`;
+  unit = "imperial";
+  unitTemp = "°F";
+  getForescast();
 }
 
 let temperapureC = null;
 let feelsLikeC = null;
+let lat = null;
+let lon = null;
+let unit = "metric";
+let unitTemp = "°C";
 let CurrentTemperature = document.querySelector(".today-temperature");
 let city = document.querySelector("#currentCity");
 let feelsLike = document.querySelector("#feels-like");
