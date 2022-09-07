@@ -18,9 +18,7 @@ function updateImage(weatherMain) {
 
 function forecastImage(forecastDay) {
   let weatherMain = forecastDay.weather[0].main;
-  // console.log(forecastDay);
   let weatherId = forecastDay.weather[0].id;
-  // console.log(weatherId);
   if (
     weatherId === 500 ||
     weatherId === 501 ||
@@ -60,7 +58,6 @@ function formatDay(timestamp) {
 
 function displayForescast(response) {
   let forecast = response.data.daily;
-  // console.log(forecast);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-2">`;
   forecast.forEach(function (forecastDay, index) {
@@ -97,19 +94,15 @@ function displayForescast(response) {
 }
 
 function getForescast() {
-  //   console.log(coordinates);
   let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
   let APIurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
-  // console.log(APIurl);
   axios.get(APIurl).then(displayForescast);
 }
 
 function showTemperature(response) {
-  // console.log(response);
   temperapureC = `${Math.round(response.data.main.temp)}`;
   CurrentTemperature.innerHTML = `${temperapureC}°C`;
   let location = response.data.name;
-  // console.log(location);
   document.querySelector("#currentCity").innerHTML = `${location}`;
   let wind = document.querySelector("#wind-speed");
   wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
@@ -120,11 +113,8 @@ function showTemperature(response) {
   let weatherStatus = document.querySelector("#weather-status");
   weatherStatus.innerHTML = `${response.data.weather[0].description}`;
   weatherStatus = response.data.weather[0].description;
-  // console.log(weatherStatus);
   let iconElement = document.querySelector(".icon_today");
-  // console.log(iconElement);
   let weatherData = response.data;
-  // console.log(weatherData);
   iconElement.setAttribute("src", forecastImage(weatherData));
   iconElement.setAttribute("alt", weatherStatus);
 
