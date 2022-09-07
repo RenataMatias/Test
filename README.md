@@ -1,3 +1,3 @@
 vanilla-weather-app
  
-hosted on Netlify: https://app.netlify.com/sites/tranquil-chimera-9513f0/deploys
+Hosted on Netlify: https://tranquil-chimera-9513f0.netlify.app/
