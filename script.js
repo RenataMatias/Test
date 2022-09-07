@@ -150,6 +150,8 @@ function UpdateMainDisplay(event) {
 }
 
 function UpdateLocationDisplay(position) {
+  unitTemp = "°C";
+  unit = "metric";
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiKey = "697a37f1b088537cbe4399bcf02a85a4";
