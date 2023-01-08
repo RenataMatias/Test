@@ -59,7 +59,7 @@ function formatDay(timestamp) {
 function displayForescast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-2">`;
+  let forecastHTML = `<div class="row row-cols-md-5 g-2">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
       forecastHTML =
@@ -115,6 +115,7 @@ function showTemperature(response) {
   weatherStatus = response.data.weather[0].description;
   let iconElement = document.querySelector(".icon_today");
   let weatherData = response.data;
+
   iconElement.setAttribute("src", forecastImage(weatherData));
   iconElement.setAttribute("alt", weatherStatus);
 
