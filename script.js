@@ -59,7 +59,7 @@ function formatDay(timestamp) {
 function displayForescast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row row-cols-md-5 g-2">`;
+  let forecastHTML = `<div class="row row-cols-md-5 g-0">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
       forecastHTML =
